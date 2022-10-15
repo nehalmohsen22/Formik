@@ -7,7 +7,7 @@ interface MyFormValues {
   password: string;
   image?: File;
   gender: string;
-  field: string;
+  field: string[];
 }
 const FILE_SIZE = 1024 * 1024;
 const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
@@ -40,14 +40,14 @@ const loginSchema = Yup.object().shape({
       (value) => !value || (value && SUPPORTED_FORMATS.includes(value[0].type))
     ),
   gender: Yup.string().required('No gender provided.'),
-  field: Yup.string().required('No field provided.'),
+  field: Yup.array().of(Yup.string()).min(1).required('No field provided.'),
 });
 export const LoginForm = () => {
   const initialValues: MyFormValues = {
     username: '',
     password: '',
     gender: '',
-    field: '',
+    field: [],
   };
 
   return (
@@ -87,7 +87,7 @@ export const LoginForm = () => {
                   />
                 ) : null}
               </div>
-              <div className="mb-6">
+              <div className="mb-4">
                 <label
                   className="mb-2 block text-sm font-bold text-orange-500"
                   htmlFor="password"
@@ -109,7 +109,7 @@ export const LoginForm = () => {
                   />
                 ) : null}
               </div>
-              <div className="mb-6">
+              <div className="mb-4">
                 <label
                   className="mb-2 block text-sm font-bold text-orange-500"
                   htmlFor="password"
@@ -136,7 +136,7 @@ export const LoginForm = () => {
                   />
                 ) : null}
               </div>
-              <div className="mb-6">
+              <div className="mb-4">
                 <label
                   className="mb-2 block text-sm font-bold text-orange-500"
                   htmlFor="password"
@@ -161,15 +161,26 @@ export const LoginForm = () => {
                 >
                   Choose Field
                 </label>
-                <Field type="checkbox" name="field" value="Front end" />{' '}
-                <span className="mr-3">Front end</span>
                 <Field
                   type="checkbox"
                   name="field"
-                  value="Back end"
+                  value="Frontend"
+                  id="frontend"
                   className="mr-1"
                 />
-                Back end
+                <label className="ml-1 mr-3" htmlFor="frontend">
+                  Front end
+                </label>
+                <Field
+                  type="checkbox"
+                  name="field"
+                  value="Backend"
+                  className="mr-1"
+                  id="backend"
+                />
+                <label className="ml-1 mr-3" htmlFor="backend">
+                  Back end
+                </label>{' '}
                 {errors.field && touched.field ? (
                   <ErrorMessage
                     name="field"
