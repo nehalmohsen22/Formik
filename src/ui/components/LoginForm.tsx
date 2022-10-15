@@ -51,7 +51,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <div className="relative mt-72 flex h-full w-full items-center justify-center">
+    <div className="relative mt-52 flex h-full w-full items-center justify-center">
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => {
@@ -61,7 +61,7 @@ export const LoginForm = () => {
         validationSchema={loginSchema}
       >
         {({ errors, touched }) => (
-          <div className=" w-full max-w-xs">
+          <div className=" w-full max-w-md">
             <Form className="mb-4  rounded-lg bg-white px-10 py-14 shadow-md ">
               <h1 className="mb-4 text-center text-2xl font-bold text-orange-500">
                 Sign Up
